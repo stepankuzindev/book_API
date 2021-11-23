@@ -1,12 +1,17 @@
 from flask import Flask
+from flask_restful import Api, Resource
 from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
+api = Api(app)
 
 
-@app.route("/hello")
-def hello() -> str:
-    return "Hello World!!!"
+class HelloWorld(Resource):
+    def get(self) -> dict:
+        return {"hello": "world"}
+
+
+api.add_resource(HelloWorld, "/hello")
 
 
 SWAGGER_URL = "/docs"  # URL for exposing Swagger UI (without trailing '/')

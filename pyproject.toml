@@ -12,6 +12,7 @@ alembic = "^1.7.5"
 pydantic = "^1.8.2"
 psycopg2 = "^2.9.2"
 flask-swagger-ui = "^3.36.0"
+Flask-RESTful = "^0.3.9"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
