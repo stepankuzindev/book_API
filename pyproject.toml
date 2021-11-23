@@ -8,6 +8,9 @@ authors = ["Stepan Kuzin <stepankuzinmail@gmail.com>"]
 python = "^3.8"
 Flask = "2.0.2"
 SQLAlchemy= "1.4.27"
+alembic = "^1.7.5"
+pydantic = "^1.8.2"
+psycopg2 = "^2.9.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
