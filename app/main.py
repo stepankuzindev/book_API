@@ -1,10 +1,9 @@
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Api
 from flask_swagger_ui import get_swaggerui_blueprint
-from marshmallow import Schema, fields
 
 app = Flask(__name__)
 api = Api(app)
@@ -17,43 +16,8 @@ spec = APISpec(
     plugins=[FlaskPlugin(), MarshmallowPlugin()],
 )
 
-
-@app.route("/api/swagger.json")
-def create_swagger_spec() -> Flask.response_class:
-    return jsonify(spec.to_dict())
-
-
-class TodoResponseSchema(Schema):
-    id = fields.Int()
-    title = fields.Str()
-    status = fields.Boolean()
-
-
-class TodoListResponseSchema(Schema):
-    todo_list = fields.List(fields.Nested(TodoResponseSchema))
-
-
-@app.route("/todo")
-def todo() -> Flask.response_class:
-    """Get List of Todo
-    ---
-    get:
-        description: Get List of Todos
-        responses:
-            200:
-                description: Return a todo list
-                content:
-                    application/json:
-                        schema: TodoListResponseSchema
-    """
-
-    dummy_data = [
-        {"id": 1, "title": "Finish this task", "status": False},
-        {"id": 2, "title": "Finish that task", "status": True},
-    ]
-
-    return TodoListResponseSchema().dump({"todo_list": dummy_data})
-
+from app.api.v1.endpoints.swagger import create_swagger_spec  # noqa
+from app.api.v1.endpoints.todo import todo  # noqa
 
 with app.test_request_context():
     spec.path(view=todo)
