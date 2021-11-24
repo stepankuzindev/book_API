@@ -6,7 +6,7 @@ from sqlalchemy import exc
 
 from app.db.base_class import Base  # noqa
 from app.db.session import session
-from app.models.models import Author, Book  # noqa
+from app.models.models import Author, Book, Order  # noqa
 
 db = session()
 
