@@ -4,7 +4,7 @@ import app.services.todo as services
 from app.main import app
 
 
-@app.route("/todo")
+@app.route("api/v1/todo", methods=["GET"])
 def todo() -> Flask.response_class:
     """Get List of Todo
     ---
