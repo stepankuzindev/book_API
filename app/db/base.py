@@ -5,7 +5,10 @@ from typing import Any
 from sqlalchemy import exc
 
 from app.db.base_class import Base  # noqa
+from app.db.session import session
 from app.models.models import Author  # noqa
+
+db = session()
 
 
 def save(db: Any, object: Any) -> None:

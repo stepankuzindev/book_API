@@ -23,7 +23,9 @@ services:
     ports:
       - "8000:8000"
     command: >
-      bash -c "cd app &&
+      bash -c "
+      alembic upgrade head &&
+      cd app &&
       flask run"
 
   postgres:

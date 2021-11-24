@@ -16,11 +16,14 @@ spec = APISpec(
     plugins=[FlaskPlugin(), MarshmallowPlugin()],
 )
 
+from app.api.v1.endpoints.author import add_author, get_authors  # noqa
 from app.api.v1.endpoints.swagger import create_swagger_spec  # noqa
 from app.api.v1.endpoints.todo import todo  # noqa
 
 with app.test_request_context():
-    spec.path(view=todo)
+    spec.path(view=todo)  # noqa
+    spec.path(view=get_authors)  # noqa
+    spec.path(view=add_author)  # noqa
 
 
 SWAGGER_URL = "/docs"  # URL for exposing Swagger UI (without trailing '/')
@@ -30,7 +33,7 @@ API_URL = "http://0.0.0.0:8000/api/swagger.json"  # Our API url (can of course b
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
     API_URL,
-    config={"app_name": "Test application"},  # Swagger UI config overrides
+    config={"app_name": "Book API"},  # Swagger UI config overrides
     # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
     #    'clientId': "your-client-id",
     #    'clientSecret': "your-client-secret-if-required",
