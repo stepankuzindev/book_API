@@ -17,13 +17,18 @@ spec = APISpec(
 )
 
 from app.api.v1.endpoints.author import add_author, get_authors  # noqa
+from app.api.v1.endpoints.book import add_book, get_books  # noqa
 from app.api.v1.endpoints.swagger import create_swagger_spec  # noqa
 from app.api.v1.endpoints.todo import todo  # noqa
 
 with app.test_request_context():
     spec.path(view=todo)  # noqa
+
     spec.path(view=get_authors)  # noqa
     spec.path(view=add_author)  # noqa
+
+    spec.path(view=get_books)  # noqa
+    spec.path(view=add_book)  # noqa
 
 
 SWAGGER_URL = "/docs"  # URL for exposing Swagger UI (without trailing '/')
